@@ -66,7 +66,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         geoCoder.geocodeAddressString(address) { (placemarks, error) in
             if error == nil && placemarks != nil && placemarks!.count > 0 {
                 if let location = placemarks?.first?.location, let image = UIImage(named: "pin") {
-                    let annotationNode = LocationAnnotationNode(location: location, image: image);
+                    let annotationNode = LocationAnnotationNode(location: CLLocation(coordinate: location.coordinate, altitude: 50.0), image: image);
+                    annotationNode.scaleRelativeToDistance = true;
                     self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode);
                 }
             }
